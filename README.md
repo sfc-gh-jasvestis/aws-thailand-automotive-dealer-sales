@@ -122,7 +122,7 @@ Industry research and Snowflake customer outcomes:
 - **AI-powered NBA increases dealer conversion rates by 15-30% in automotive retail** — [McKinsey Automotive](https://www.mckinsey.com/industries/automotive-and-assembly/our-insights)
 - **Demand-driven inventory allocation reduces days-on-lot by 20-35%, improving working capital** — [BCG Automotive](https://www.bcg.com/industries/automotive)
 - **Personalized dealer communications increase engagement 3-5x over generic outreach** — [Salesforce State of Marketing](https://www.salesforce.com/resources/research-reports/state-of-marketing/)
-
+- **BMW Group** (Snowflake customer): saved 25% on large data workloads and launched 60 operational use cases in 18 months on Snowflake -- [snowflake.com/customers/bmw-group](https://www.snowflake.com/en/customers/all-customers/case-study/bmw-group/)
 
 ## Key Demo Numbers
 
