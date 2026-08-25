@@ -1,6 +1,6 @@
 -- ============================================================================
 -- 09_AWS_INTEGRATION.SQL — AWS services for Dealer Network & Sales Intelligence
--- Account: 018437500440 | Region: ap-southeast-1
+-- Account: <YOUR_AWS_ACCOUNT_ID> | Region: ap-southeast-1
 -- Skip this script for Snowflake-only build
 -- ============================================================================
 USE DATABASE DEALER_SALES_INTEL;
@@ -72,11 +72,11 @@ CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION aws_thailand_automotive_dealer_sal
   ENABLED = TRUE
   COMMENT = 'SNS access for Dealer Network & Sales Intelligence alerts';
 
--- SNS Topic ARN: arn:aws:sns:ap-southeast-1:018437500440:sea-demos-aws-thailand-automotive-dealer-sales
+-- SNS Topic ARN: arn:aws:sns:ap-southeast-1:<YOUR_AWS_ACCOUNT_ID>:sea-demos-aws-thailand-automotive-dealer-sales
 
 -- ==================== KINESIS / IOT CORE INGESTION ====================
 -- Snowpipe from Kinesis Data Stream
--- Stream ARN: arn:aws:kinesis:ap-southeast-1:018437500440:stream/aws-thailand-automotive-dealer-sales-stream
+-- Stream ARN: arn:aws:kinesis:ap-southeast-1:<YOUR_AWS_ACCOUNT_ID>:stream/aws-thailand-automotive-dealer-sales-stream
 
 CREATE OR REPLACE PIPE RAW.REALTIME_PIPE
   AUTO_INGEST = TRUE
