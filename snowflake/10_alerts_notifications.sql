@@ -8,7 +8,7 @@ USE SCHEMA APP;
 CREATE OR REPLACE NOTIFICATION INTEGRATION aws_thailand_automotive_dealer_sales_EMAIL_INT
   TYPE = EMAIL
   ENABLED = TRUE
-  ALLOWED_RECIPIENTS = ('jonathan.asvestis@snowflake.com');
+  ALLOWED_RECIPIENTS = ('<YOUR_EMAIL>');
 
 -- Alert: DEALER_UNDERPERFORM_ALERT
 CREATE OR REPLACE ALERT APP.DEALER_UNDERPERFORM_ALERT
@@ -22,7 +22,7 @@ IF (EXISTS (
 THEN
   CALL SYSTEM$SEND_EMAIL(
     'aws_thailand_automotive_dealer_sales_EMAIL_INT',
-    'jonathan.asvestis@snowflake.com',
+    '<YOUR_EMAIL>',
     '[ALERT] Dealer Network & Sales Intelligence: Dealer significantly underperforming target',
     'Dealer significantly underperforming target'
   );
@@ -41,7 +41,7 @@ IF (EXISTS (
 THEN
   CALL SYSTEM$SEND_EMAIL(
     'aws_thailand_automotive_dealer_sales_EMAIL_INT',
-    'jonathan.asvestis@snowflake.com',
+    '<YOUR_EMAIL>',
     '[ALERT] Dealer Network & Sales Intelligence: Inventory aging — demand mismatch detected',
     'Inventory aging — demand mismatch detected'
   );
