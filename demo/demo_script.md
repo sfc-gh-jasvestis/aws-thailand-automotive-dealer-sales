@@ -1,109 +1,82 @@
-# Demo Script: Dealer Network & Sales Intelligence
-## ~4-Minute Recorded Walkthrough
-**Format**: Screen recording with voiceover
-**Target**: Customer meeting / booth loop / social share
-**Narrative**: "Snowflake unifies dealer sales data, generates AI-powered next-best-action recommendations for 450 dealers, and automates personalized outreach — replacing fragmented CRM with unified intelligence"
-**Demo Mode**: Open app with `?demo=true` for presenter notes
+# Dealer Network & Sales Intelligence
 
----
+**Thailand - Automotive Manufacturing**
+Use case: Dealer Sales & Next Best Action
 
-## Two Personas
+> Sales intelligence across 450 Thai dealerships — Personalize drives next-best-action recommendations, Cortex Complete generates personalized outreach, and SES delivers through Notification Integration.
 
-| Persona | Role | Tool | What they care about |
-|---|---|---|---|
-| **Kittisak Charoenphol** | VP Sales & Distribution | React App (SPCS) | National sales targets, dealer performance, inventory allocation, market share |
-| **Patchara Wongsawat** | Regional Sales Manager | Amazon QuickSight | Dealer conversion rates, lead quality, inventory turn, customer satisfaction scores |
+## Why Snowflake
 
----
+Snowflake unifies dealer sales data, generates AI-powered next-best-action recommendations for 450 dealers, and automates personalized outreach — replacing fragmented CRM with unified intelligence
 
-## What's Built
+- **Cortex Complete for Next Best Action** - Only demo generating dealer-specific NBA recommendations with AI and auto-delivering via Notification Integration
+- **ML.FORECAST for regional demand by model** - Demand forecasting at region × model granularity driving inventory allocation
+- **NBA → Notification Integration pipeline** - End-to-end: AI generates recommendation → writes outreach → sends via email
+- **Thai dealer network context** - 450 realistic Thai dealer names across 5 regions with local market dynamics
+- **Dealer anomaly detection** - ML.ANOMALY_DETECTION identifies dealers with sudden performance degradation
+- **Inventory-demand matching via Dynamic Tables** - Real-time inventory reallocation recommendations based on forecast demand signals
 
-| Layer | Component | Detail |
+## What is deployed
+
+| | |
+|---|---|
+| Database | `THAILAND_AUTOMOTIVE_DEALER_SALES` |
+| Service | `THAILAND_AUTOMOTIVE_DEALER_SALES_APP` |
+| Compute pool | `SEA_DEMOS_THAILAND_POOL` |
+| Dimension table | `RAW.THAI_AUTO_MARKET` (20 rows) |
+| Fact table | `RAW.CUSTOMER_PROFILES` (250,000 rows, 90 days) |
+| Curated layer | `CURATED.PERFORMANCE_SUMMARY`, `CURATED.TREND_ANALYSIS`, `CURATED.KPI_SUMMARY` |
+| Currency | THB (฿) |
+
+Regions in play: Bangkok, Chonburi, Rayong, Chiang Mai, Songkhla
+Segments: Flagship 3S, Urban Showroom, Provincial Dealer, Service Only
+
+Dynamic tables are created suspended and refreshed on demand:
+
+```bash
+./refresh_demo_data.sh THAILAND_AUTOMOTIVE_DEALER_SALES
+```
+
+## KPI cards
+
+Every card below is served live from `CURATED.KPI_SUMMARY`. The app keeps the
+original literal as a fallback, so it still renders if Snowflake is unreachable.
+
+| Card | Value | Backed by |
 |---|---|---|
-| **RAW** | 8 tables | DEALERS (450), SALES_TRANSACTIONS (85000), CUSTOMER_PROFILES (120000), INVENTORY (15000), LEADS (35000), NBA_ACTIONS (2000), MARKETING_CAMPAIGNS (200), THAI_AUTO_MARKET (12) |
-| **CURATED** | 4 Dynamic Tables | DEALER_PERFORMANCE, REGIONAL_SALES_TRENDS, CUSTOMER_SEGMENTS, INVENTORY_DEMAND_MATCH |
-| **ML** | ML.FORECAST + ML.ANOMALY_DETECTION | Forecasting + anomaly detection |
-| **AI** | COMPLETE, AI_CLASSIFY, AI_EXTRACT | Classification + extraction |
-| **Search** | Cortex Search | 200 documents indexed |
-| **Agent** | DEALER_INTELLIGENCE_AGENT | Semantic View + Search tools |
+| Dealer Revenue (MTD) | `฿2.8B` | total across Thai Auto Market |
+| Inventory Days | `42` | average per event |
+| Lead Conversion | `18.7%` | average per event |
+| Active Dealers | `312` | total across Thai Auto Market |
+| EV Mix Forecast | `34%` | average per event |
+| Avg Days to Sale | `28` | average per event |
+| Test Drive Conversion | `24%` | average per event |
 
 
----
+## Demo flow
 
-## The Story
+1. Executive Cockpit
+2. Next Best Action
+3. Demand & Inventory
+4. Ask AI
+5. Architecture & Data
 
-Thailand's largest auto brand operates 450 dealerships nationwide, but fragmented CRM data means ฿3.2B in quarterly sales gap goes unaddressed. AI-powered next-best-action recommendations, personalized outreach, and demand-driven inventory allocation can close the gap — all from unified Snowflake analytics.
+## Talking points
 
----
+- **฿3.2B** - quarterly sales gap to close (US$91M)
+- **47 dealers** - flagged for intervention (conversion rate declining)
+- **450 dealers** - receiving personalized NBA recommendations weekly
+- **15% EV surge** - forecast for Chiang Mai next quarter (ML.FORECAST)
+- **85,000 sales** - transactions analyzed for pattern detection
+- **2,000 NBAs** - generated by Cortex Complete this quarter
 
-## Script
+## Business impact
 
-### [0:00–0:45] EXECUTIVE COCKPIT
-
-**Show**: Executive Cockpit tab
-
-> "National sales at 82% of target — ฿3.2B gap to close this quarter."
-
-**Action**: Point at the ฿3.2B gap-to-target KPI
-
-### [0:45–1:30] NEXT BEST ACTION
-
-**Show**: Next Best Action tab
-
-> "AI generates personalized NBA for each dealer — incentive packages, inventory swaps, training focus."
-
-**Action**: Show NBA recommendation cards
-
-### [1:30–2:15] DEMAND & INVENTORY
-
-**Show**: Demand & Inventory tab
-
-> "ML.FORECAST projects 15% EV demand surge in Chiang Mai next quarter based on registration trends."
-
-**Action**: Show demand forecast by region and model
-
-### [2:15–3:00] ASK AI
-
-**Show**: Ask AI tab
-
-> "Kittisak asks: 'Which dealers should receive Q4 incentive packages?'"
-
-**Action**: Type: 'Dealers needing incentives ranked by gap-to-target'
-
-### [3:00–3:45] ARCHITECTURE & DATA
-
-**Show**: Architecture & Data tab
-
-> "Seven Snowflake capabilities, six AWS services."
-
-**Action**: Walk through architecture diagram
-
+- Thailand's domestic auto market: 775,780 vehicles sold in 2023 through 2,800+ dealer outlets (FTI Thailand)
+- AI-powered NBA increases dealer conversion rates by 15-30% in automotive retail (McKinsey Automotive)
+- Demand-driven inventory allocation reduces days-on-lot by 20-35%, improving working capital (BCG Automotive)
+- Personalized dealer communications increase engagement 3-5x over generic outreach (Salesforce State of Marketing)
 
 ---
-
-## Key Demo Differentiators
-
-1. **Cortex Complete for Next Best Action** — Only demo generating dealer-specific NBA recommendations with AI and auto-delivering via Notification Integration
-2. **ML.FORECAST for regional demand by model** — Demand forecasting at region × model granularity driving inventory allocation
-3. **NBA → Notification Integration pipeline** — End-to-end: AI generates recommendation → writes outreach → sends via email
-4. **Thai dealer network context** — 450 realistic Thai dealer names across 5 regions with local market dynamics
-5. **Dealer anomaly detection** — ML.ANOMALY_DETECTION identifies dealers with sudden performance degradation
-6. **Inventory-demand matching via Dynamic Tables** — Real-time inventory reallocation recommendations based on forecast demand signals
-
-
----
-
-## Demo Prep Checklist
-
-### Data Verification
-- [ ] `SELECT COUNT(*) FROM DEALER_SALES_INTEL.RAW.SALES_TRANSACTIONS` → 85000
-- [ ] `SELECT COUNT(*) FROM DEALER_SALES_INTEL.RAW.DEALERS` → 450
-- [ ] `SELECT COUNT(*) FROM DEALER_SALES_INTEL.CURATED.DEALER_PERFORMANCE WHERE SALES_VS_TARGET < 0.70` → ~47
-
-### ML Model Verification
-- [ ] `SELECT COUNT(*) FROM DEALER_SALES_INTEL.ML.REGIONAL_SALES_FORECAST_RESULTS` → >0
-- [ ] `SELECT SUM(CASE WHEN IS_ANOMALY THEN 1 ELSE 0 END) FROM DEALER_SALES_INTEL.ML.DEALER_PERFORMANCE_ANOMALY_RESULTS` → >=30
-
-### AI/Agent Verification
-- [ ] `SELECT COUNT(*) FROM DEALER_SALES_INTEL.AI.NBA_RECOMMENDATIONS` → 2000
-
+Generated from `generator/demo_specs/aws-thailand-automotive-dealer-sales.json`. Do not hand-edit: run
+`python3 generator/gen_repo_docs.py aws-thailand-automotive-dealer-sales` instead.
