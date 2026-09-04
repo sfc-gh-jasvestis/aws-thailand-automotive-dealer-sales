@@ -53,6 +53,7 @@ export default function HomePage() {
         <div className="lg:col-span-1">
           <GeoMap
             country="thailand"
+            regions={data?.regions}
             markers={[{"label": "Bangkok", "value": "87 dealers, \u0e3f1.2B", "color": "green", "size": "lg"}, {"label": "Chiang Mai", "value": "24 dealers", "color": "green", "size": "md"}, {"label": "Khon Kaen", "value": "18 dealers, -12%", "color": "amber", "size": "md"}, {"label": "Phuket", "value": "8 dealers", "color": "green", "size": "sm"}, {"label": "Hat Yai", "value": "12 dealers", "color": "green", "size": "sm"}]}
             routes={[]}
             title="Geographic Overview"
@@ -69,7 +70,7 @@ export default function HomePage() {
           title="Sales Volume by Region (Weekly)"
         />
         <Chart
-          data={data?.categories || [{ category: 'North', count: 82 }, { category: 'Central', count: 74 }, { category: 'South', count: 91 }, { category: 'Highland', count: 68 }, { category: 'Coastal', count: 77 }]}
+          data={data?.categoryMetric || [{ category: 'North', count: 82 }, { category: 'Central', count: 74 }, { category: 'South', count: 91 }, { category: 'Highland', count: 68 }, { category: 'Coastal', count: 77 }]}
           type="bar"
           xKey="category"
           yKeys={[{ key: 'count', name: '฿M' }]}
