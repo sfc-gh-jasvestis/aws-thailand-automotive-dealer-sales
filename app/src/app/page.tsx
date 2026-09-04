@@ -53,6 +53,7 @@ export default function HomePage() {
         <div className="lg:col-span-1">
           <GeoMap
             country="thailand"
+            labels={{ entity: 'Dealers', event: 'Profile Updates', alert: 'Lost Deals' }}
             regions={data?.regions}
             markers={[{"label": "Bangkok", "value": "87 dealers, \u0e3f1.2B", "color": "green", "size": "lg"}, {"label": "Chiang Mai", "value": "24 dealers", "color": "green", "size": "md"}, {"label": "Khon Kaen", "value": "18 dealers, -12%", "color": "amber", "size": "md"}, {"label": "Phuket", "value": "8 dealers", "color": "green", "size": "sm"}, {"label": "Hat Yai", "value": "12 dealers", "color": "green", "size": "sm"}]}
             routes={[]}
@@ -83,8 +84,13 @@ export default function HomePage() {
         columns={[
           { key: 'id', header: 'Rank' },
           { key: 'name', header: 'Dealer' },
+          { key: 'region', header: 'Region' },
           { key: 'status', header: 'Trend' },
-          { key: 'value', header: 'Units Sold' },
+          { key: 'm1', header: 'Units Sold' },
+          { key: 'm2', header: 'Lead Conversion' },
+          { key: 'm3', header: 'EV Mix Forecast' },
+          { key: 'events', header: 'Profile Updates' },
+          { key: 'alerts', header: 'Lost Deals' },
         ]}
         data={data?.entities || []}
         title="Top Dealer Performance"
